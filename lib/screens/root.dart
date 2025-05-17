@@ -4,7 +4,6 @@ import 'package:gold/const/constants.dart';
 import 'package:gold/screens/arz_screen.dart';
 import 'package:gold/screens/gold_screen.dart';
 import 'package:gold/screens/crypto_screen.dart';
-import 'package:gold/utils/update_checker.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({super.key});

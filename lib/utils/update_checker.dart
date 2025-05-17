@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:dio/dio.dart';
-import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 import 'package:gold/widgets/snackbar_utils.dart';
 
@@ -153,7 +152,7 @@ class UpdateChecker {
                       if (downloadUrl != null) {
                         try {
                           Navigator.of(context).pop();
-                          await _launchURL(downloadUrl);
+
                           if (context.mounted) {
                             SnackBarUtils.showSuccess(
                               context,
@@ -167,7 +166,6 @@ class UpdateChecker {
                               context,
                               message: 'Failed to open download link',
                               actionLabel: 'RETRY',
-                              onActionPressed: () => _launchURL(downloadUrl),
                             );
                           }
                         }
@@ -307,19 +305,5 @@ class UpdateChecker {
       if (latest[i] < current[i]) return false;
     }
     return false;
-  }
-
-  static Future<void> _launchURL(String url) async {
-    try {
-      if (!await url_launcher.launchUrl(
-        Uri.parse(url),
-        mode: url_launcher.LaunchMode.externalApplication,
-      )) {
-        throw Exception('Could not launch $url');
-      }
-    } catch (e) {
-      print('Error launching URL: $e');
-      throw Exception('Could not launch $url: $e');
-    }
   }
 }
